@@ -20,3 +20,17 @@ export const createUser = async (req, res) => {
       res.status(500).json({ message: "An error occurred", error: error.message });
     }
   };
+  // Update a user by ID
+export const updateUser = async (req, res) => {
+    try {
+      const userId = req.params.id;
+      const updatedUser = await User.findByIdAndUpdate(userId, req.body, { new: true });
+      if (!updatedUser) {
+        res.status(404).json({ message: "User not found" });
+      } else {
+        res.status(200).json({ message: "User updated", data: updatedUser });
+      }
+    } catch (error) {
+      res.status(500).json({ message: "An error occurred", error: error.message });
+    }
+  };
