@@ -13,6 +13,9 @@ connectDB();
 
 app.use(cors());
 app.use(express.json());
+app.get("/" , (req,res)=>{
+  res.send("Hello from server");
+})
 app.use("/api", userRoutes);
 const PORT = process.env.PORT || 3000;
 app.listen(PORT, () => {
