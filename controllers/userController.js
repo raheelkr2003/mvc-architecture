@@ -1,7 +1,7 @@
-import User from "../models/userModel.js";
+const User = require("../models/userModel.js");
 
 // Get all users
-export const getUsers = async (req, res) => {
+ const getUsers = async (req, res) => {
   try {
     const users = await User.find();
     res.status(200).json({ message: "All users fetched", data: users });
@@ -10,7 +10,7 @@ export const getUsers = async (req, res) => {
   }
 };
 // Create a new user
-export const createUser = async (req, res) => {
+ const createUser = async (req, res) => {
     try {
       const { name, email, age } = req.body;
       const newUser = new User({ name, email, age });
@@ -21,7 +21,7 @@ export const createUser = async (req, res) => {
     }
   };
   // Update a user by ID
-export const updateUser = async (req, res) => {
+ const updateUser = async (req, res) => {
     try {
       const userId = req.params.id;
       const updatedUser = await User.findByIdAndUpdate(userId, req.body, { new: true });
@@ -35,7 +35,7 @@ export const updateUser = async (req, res) => {
     }
   };
   // Delete a user by ID
-export const deleteUser = async (req, res) => {
+ const deleteUser = async (req, res) => {
     try {
       const userId = req.params.id;
       const deletedUser = await User.findByIdAndDelete(userId);
@@ -48,3 +48,6 @@ export const deleteUser = async (req, res) => {
       res.status(500).json({ message: "An error occurred", error: error.message });
     }
   };
+
+
+  module.exports = {deleteUser , updateUser  , createUser , getUsers}
